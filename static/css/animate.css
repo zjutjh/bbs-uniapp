@@ -1,0 +1,162 @@
+@keyframes popIn
+{
+    from {
+		transform: scale(.8);
+	}
+    to {
+		transform: scale(1);
+	}
+}
+.popIn {
+	animation: popIn .2s;
+	animation-timing-function:ease;
+}
+@keyframes popOut
+{
+    from {
+		transform: scale(1);
+	}
+    to {
+		transform: scale(.8);
+	}
+}
+
+.popOut {
+	animation: popOut .2s;
+	animation-timing-function:ease;
+}
+
+@keyframes fadeIn
+{
+    from {
+		opacity: .5;
+	}
+    to {
+		opacity: 1;
+	}
+}
+.fadeIn {
+	animation: fadeIn .2s;
+	animation-timing-function: ease;
+}
+@keyframes fadeOut
+{
+    from {
+		opacity: 1;
+	}
+    to {
+		opacity: .5;
+	}
+}
+.fadeOut {
+	animation: fadeOut .2s;
+	animation-timing-function:ease;
+}
+
+@keyframes slideUp
+{
+    from {
+		transform: translateY(-100%);
+	}
+    to {
+		transform: translateY(0);
+	}
+}
+.slideUp {
+	animation: slideUp .2s;
+	animation-timing-function:ease;
+}
+@keyframes slideDown
+{
+    from {
+    	transform: translateY(0);
+    }
+    to {
+    	transform: translateY(-100%);
+    }
+}
+.slideDown {
+	animation: slideDown .2s;
+	animation-timing-function: ease;
+}
+
+.v-enter {
+	animation: slideDown .2s;
+	animation-timing-function: ease;
+}
+.v-enter-avtive {
+
+}
+.v-enter-to {
+	
+}
+@keyframes slide-right
+{
+    from {
+    	transform: translateX(50%);
+		opacity: 0;
+    }
+    to {
+    	transform: translateY(0);
+		opacity: 1;
+    }
+}
+@keyframes slide-left
+{
+    from {
+    	transform: translateX(-50%);
+		opacity: 0;
+    }
+    to {
+    	transform: translateY(0);
+		opacity: 1;
+    }
+}
+
+.slide-right-enter-active {
+	animation: slide-right .4s;
+	animation-timing-function: ease;
+}
+.slide-right-leave-active {
+	animation: slide-left .4s;
+	animation-timing-function: ease;
+}
+
+.slide-left-enter-avtive {
+	animation: slide-left .4s;
+	animation-timing-function: ease;
+}
+.slide-left-leave-avtive {
+	animation: slide-right .4s;
+	animation-timing-function: ease;
+}
+
+@keyframes right-in {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes right-out {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+
+
+.popIn-enter-active {
+    animation: popIn .2s ease-in-out;
+}
+
+.popIn-leave-active {
+    /* animation: popIn 0.4s ease-in-out reverse; */
+}
