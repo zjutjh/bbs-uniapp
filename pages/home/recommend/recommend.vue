@@ -72,10 +72,11 @@
 					},
 					{
 						name: 'star',
-						title: '超星',
+						title: '作业',
 						bgColor: '#db2d3b',
 						click:() => {
-							this.toChaoxingIndex()
+							this.toWebview('http://mooc1-api.chaoxing.com/work/stu-work')
+							// this.toChaoxingIndex()
 						}
 						// 跑腿，帮拿外卖，帮取快递
 					},

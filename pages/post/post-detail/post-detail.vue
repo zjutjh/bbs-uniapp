@@ -130,11 +130,9 @@
 						placeholder="参与评价~">
 				</view>
 				<view v-show="commentValue==''" class="row-right count-wrap">
-					<!-- #ifdef APP -->
 					<view class="count" @click="share()">
 						<u-icon name="share-square" color="" size="24" />{{postDetail.shareCount}}
 					</view>
-					<!-- #endif -->
 					<!-- 点赞是否高亮 -->
 					<view v-if="postDetail.isThumb" @click.stop="changeLikePost(false)" class="count count-active">
 						<u-icon name="thumb-up" color="" size="24" />{{postDetail.thumbCount}}
@@ -332,11 +330,26 @@
 			share() {
 				let pages = getCurrentPages()
 				let curPage = pages[pages.length-1]
-				let url = curPage.route
+				let path = curPage.__page__.fullPath.slice(1)
+				let url = `${this.$config.h5Url}${path}`
+				
+				// #ifdef APP-PLUS
 				uni.shareWithSystem({
 				  summary: '快看这个',
-				  href: `${this.$config.h5Url}${url}`
+				  href: url
 				})
+				// #endif
+				
+				// #ifndef APP-PLUS
+				uni.setClipboardData({
+					data: url,
+					showToast: false,
+					success: () => {
+						this.$u.toast('已复制分享链接')
+					}
+				});
+				// #endif
+				
 			},
 			actionSelect(index) {
 				this.actionList[index].onclick();

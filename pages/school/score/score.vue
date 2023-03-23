@@ -6,7 +6,7 @@
 			<u-loading-icon v-if="isLoading" :show="true"></u-loading-icon>
 			<view class="list">
 				<view class="item flex-between" v-for="item in dataList">
-					<text>{{item.className}}</text>
+					<text>{{item.lessonName}}</text>
 					<text>{{item.score}}</text>
 				</view>
 			</view>

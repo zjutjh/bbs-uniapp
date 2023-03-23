@@ -2,8 +2,8 @@ const appName = "工大论坛"; //分享时的标题
 const h5Url = "http://zjut.xgcode.cn/#/"; // 前端页面
 
 // api接口地址配置
-const baseUrl = "localhost:8080"; // 本地测试
-// const baseUrl = "www.xgcode.cn:8090"; // 上线
+// const baseUrl = "localhost:8080"; // 本地测试
+const baseUrl = "www.xgcode.cn:8090"; // 上线
 // const baseUrl = "902e207.r8.cpolar.top"; // 内网穿透
 
 const domain = `http://${baseUrl}/`; 

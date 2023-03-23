@@ -12,8 +12,7 @@
 		<view class="list">
 			<view v-if="searchValue.trim().length>=2">
 				<text v-if="searchTopicList.length>0">搜索到的话题</text>
-				<view class="item" @click="chooseSearchTopic(index,item.id,item.name)" :class="{active:item.isActive}"
-					v-for="item,index in searchTopicList" :key="'s'+item.id">
+				<view class="item" v-for="(item,index) in searchTopicList" @click="chooseSearchTopic({index,id:item.id,name:item.name})" :class="{active:item.isActive}" :key="'s'+item.id">
 					<view class="name u-line-1">{{'# '+item.name}}</view>
 					<view class="des">{{item.postCount+' 动态'}}</view>
 				</view>
@@ -21,7 +20,7 @@
 			
 			<view v-if="searchValue.trim().length<2">
 				<text>最新话题</text>
-				<view class="item" @click="chooseNewTopic(index,item.id,item.name)" :class="{active:item.isActive}"
+				<view class="item" @click="chooseNewTopic({index,id:item.id,name:item.name})" :class="{active:item.isActive}"
 					v-for="item,index in newTopicList" :key="'new'+item.id">
 					<view class="name u-line-1">{{'# '+item.name}}</view>
 					<view class="des">{{item.postCount+' 动态'}}</view>
@@ -29,7 +28,7 @@
 			</view>
 			<view v-if="searchValue.trim().length<2">
 				<text>热门话题</text>
-				<view class="item" @click="chooseHotTopic(index,item.id,item.name)" :class="{active:item.isActive}"
+				<view class="item" @click="chooseHotTopic({index,id:item.id,name:item.name})" :class="{active:item.isActive}"
 					v-for="item,index in hotTopicList" :key="'hot'+item.id">
 					<view class="name u-line-1">{{'# '+item.name}}</view>
 					<view class="des">{{item.postCount+' 动态'}}</view>
@@ -54,7 +53,6 @@
 				searchTopicList: [],
 				chooseList: [],
 				searchValue: '',
-
 			};
 		},
 		created() {
@@ -88,45 +86,36 @@
 					}
 				})
 			},
-			chooseSearchTopic(index, id, name) {
+			chooseSearchTopic({index,id,name}) {
 				if (this.searchTopicList[index].isActive) { // 若已选择
 					this.searchTopicList[index].isActive = false // 置未未选状态
 					this.chooseList = this.chooseList.filter(item => item.id != id) // 删除
 				} else {
 					this.searchTopicList[index].isActive = true // 置未已选状态
 					this.chooseList = this.chooseList.filter(item => item.id != id) // 删除
-					this.chooseList.push({
-						id,
-						name
-					})
+					this.chooseList.push({id,name})
 				}
 				this.$forceUpdate()
 			},
-			chooseHotTopic(index, id, name) {
+			chooseHotTopic({index,id,name}) {
 				if (this.hotTopicList[index].isActive) { // 若已选择
 					this.hotTopicList[index].isActive = false // 置未未选状态
 					this.chooseList = this.chooseList.filter(item => item.id != id) // 删除
 				} else {
 					this.hotTopicList[index].isActive = true // 置未已选状态
 					this.chooseList = this.chooseList.filter(item => item.id != id) // 删除
-					this.chooseList.push({
-						id,
-						name
-					})
+					this.chooseList.push({id,name})
 				}
 				this.$forceUpdate()
 			},
-			chooseNewTopic(index, id, name) {
+			chooseNewTopic({index,id,name}) {
 				if (this.newTopicList[index].isActive) { // 若已选择
 					this.newTopicList[index].isActive = false // 置未未选状态
 					this.chooseList = this.chooseList.filter(item => item.id != id) // 删除
 				} else {
 					this.newTopicList[index].isActive = true // 置未已选状态
 					this.chooseList = this.chooseList.filter(item => item.id != id) // 删除
-					this.chooseList.push({
-						id,
-						name
-					})
+					this.chooseList.push({id,name})
 				}
 				this.$forceUpdate()
 			},
@@ -151,7 +140,7 @@
 			ok() {
 				let pages = getCurrentPages();
 				let prevPage = pages[pages.length - 2];
-				prevPage.$vm.topicList = this.chooseList
+				prevPage.$vm.topicList = this.chooseList.slice(0,3)
 				uni.navigateBack();
 			}
 		}

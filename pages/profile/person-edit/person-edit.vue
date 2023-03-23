@@ -46,7 +46,7 @@
 			</view>
 		</view>
 
-		<u-datetime-picker :show="birthdayShow" v-model="showBody.birthday" mode="date" :minDate="1000" :maxDate="+new Date()"
+		<u-datetime-picker :show="birthdayShow" v-model="showBody.birthday" mode="date" :minDate="1000" :maxDate="maxDate"
 			@cancel="birthdayShow=false" @confirm="birthdayConfirm" @close="birthdayShow=false" closeOnClickOverlay/>
 				
 		<u-picker :show="genderPickerShow" :columns="genderColumns" keyName="label" 
@@ -93,7 +93,8 @@
 				birthdayShow: false,
 				inputValue: null,
 				inputShow: false,
-				inputKey: null
+				inputKey: null,
+				maxDate: +new Date()
 			};
 		},
 		mounted() {

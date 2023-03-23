@@ -2,7 +2,8 @@
 	<view class="page-container" :data-theme="theme">
 		<u-navbar title="" bgColor="var(--bg-color)" autoBack placeholder>
 			<view slot="right">
-				<view class="btn" @click="submit()">发布</view>
+				<view v-if="!uploading" class="btn" @click="submit()">发布</view>
+				<view v-else class="btn btn-unable">发布中...</view>
 			</view>
 		</u-navbar>
 		<view class="page-main">
@@ -79,12 +80,17 @@
 				showEmoji: false,
 				emojiList: [
 					['😀','😅','☺️','🤣','😆','😗️','😙️'],
+					['😘️','☺️','🤗','🤔','😏','🥳️','🤤️'],
 					['😁','😎','😋️','🤔','🤩','🙂','🥲️'],
 					['😢','😭','😩️','🙄','😶','🤨️','😐'],
 					['😡','😤','😖️','😞','🤐','😯','😫'],
 					['😪','😴','😔️','🤤','😒','😵️','🤡️'],
+					['😱','🥵','🥶️','😳','😰','🤪','🤢️'],
+					['🤬','🤧','👻️','🤮','🙃','😺','😸️'],
+					['😹','😻','😼️','😽','🙀','😿','😾️'],
 					['🎉','🎁','♥️','💔','🌹','🌷','⭐️'],
 				],
+				uploading: false, // 是否正在发布
 			};
 		},
 		onLoad(e) {
@@ -120,12 +126,16 @@
 				})
 			},
 			async submit() {
+				if (this.uploading) { // 节流防抖
+					return
+				}
 				if (this.content.trim() == '') {
 					return this.$u.toast('内容不能为空')
 				}
 				if (!this.circle && this.topicList.length == 0) {
 					return this.$u.toast('请至少选择一个圈子或一个话题')
 				}
+				this.uploading = true
 				let imageLength = this.imageBlobList.length
 				let objectIds = []
 				if (imageLength > 0) { //需要上传图片
@@ -155,7 +165,6 @@
 							gap = nowTime - beginTime
 						}
 					}
-					uni.hideLoading()
 				} else { // 不需要上传图片
 					this.addPostF(objectIds)
 				}
@@ -178,6 +187,7 @@
 				} else {
 					this.$u.toast(res.msg)
 				}
+				this.uploading = false
 				uni.hideLoading()
 			},
 			toChooseCircle() {
@@ -292,5 +302,8 @@
 		padding: 8rpx 14rpx;
 		color: white;
 		background-color: var(--color-primary);
+	}
+	.btn-unable {
+		background-color: var(--color-eee);
 	}
 </style>

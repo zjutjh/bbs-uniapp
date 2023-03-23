@@ -13,10 +13,6 @@
 				<view class="row-item">消息通知 [开发中]</view>
 				<view class="row-item">隐私 [开发中]</view>
 			</view>
-			<view class="title">配置</view>
-			<view class="row-section">
-				<view class="row-item">课程自动签到 [开发中]</view>
-			</view>
 		</view>
 	</view>
 </template>

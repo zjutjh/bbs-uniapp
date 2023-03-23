@@ -28,7 +28,7 @@
 				<view class="card card-help">
 					<u-collapse :border="false">
 						<u-collapse-item title="获取用户信息失败,怎么办？">
-							<text class="u-collapse-content">点击下方按钮，重新登录一下</text>
+							<text class="u-collapse-content">点击下方退出登录按钮，重新登录一下</text>
 						</u-collapse-item>
 						<u-collapse-item title="课程信息加载不出来怎么办？">
 							<text class="u-collapse-content">请返回，重新进入课程页面\n如果还不行就点下方退出按钮，重新登录下</text>
