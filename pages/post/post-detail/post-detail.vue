@@ -178,7 +178,7 @@
 					pageNum: 0,
 					pageSize: 16,
 					postId: null,
-					orderMode: 0
+					orderMode: 0 // 0最热排序 1最新 2最旧
 				},
 				loadStatus: 'nomore',
 				commentValue: '',

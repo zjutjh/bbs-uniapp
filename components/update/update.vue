@@ -30,9 +30,9 @@ export default {
             downloadTask:null,
             time:10,
             isCheck:false,
-			version: "0",
+			version: null,
 			show: false,
-			res: {}
+			res: {} // 调用更新接口返回的结果
         };
     },
 	computed: {
@@ -43,6 +43,7 @@ export default {
 		}
 	},
 	mounted() {
+		this.version = this.$config.appVersion
 		// #ifdef APP-PLUS
 		plus.runtime.getProperty(plus.runtime.appid, (widgetInfo)=> {
 		    this.version = widgetInfo.version;
@@ -54,7 +55,7 @@ export default {
     methods:{
         // 检查补丁更新
         checkWgtFun() {
-            updateApp().then(res=> {
+            updateApp().then(res => {
 				let result = res.data.version
 				if(this.version.substr(0, 3) * 1 > result.substr(0, 3) * 1){
 					if(this.verShow){

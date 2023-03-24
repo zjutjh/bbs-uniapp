@@ -7,7 +7,6 @@
 					<view @click.stop="toPersonDetail(post.user.userId)">
 						<u-avatar size="36" :src="post.user.avatar"/>
 					</view>
-					
 					<view class="user-info">
 						<view class="user-name">
 							<text>{{post.user.nickName}}</text>
