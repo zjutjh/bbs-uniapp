@@ -62,9 +62,9 @@
 				captchaUrl: 'https://cdn.uviewui.com/uview/album/1.jpg',
 				loginDto: {
 					loginType: null,
-					userName: null,
-					password: null,
-					captcha: null,
+					userName: '',
+					password: '',
+					captcha: '',
 					captchaId: null
 				}
 			}
@@ -76,22 +76,34 @@
 			this.updateCaptch()
 		},
 		methods: {
-			async updateCaptch(lastCaptchaId) {
+			async updateCaptch() {
+				this.loginDto.captcha = ''
 				let res = await captchaImage()
 				this.loginDto.captchaId = res.data.captchaId
 				this.captchaUrl = 'data:image/png;base64,' + res.data.img
 			},
 			async loginSumbit() {
+				if (this.loginDto.userName.trim().length == 0) {
+					return this.$u.toast('请输入用户名')
+				}
+				if (this.loginDto.password.trim().length == 0) {
+					return this.$u.toast('请输入密码')
+				}
+				if (this.loginDto.captcha.trim().length == 0) {
+					return this.$u.toast('请输入验证码')
+				}
 				uni.showLoading()
-				let res = await login(this.loginDto)
-				if (res.code == 2000) {
+				try{
+					let res = await login(this.loginDto)
 					this.$u.toast('登录成功')
 					this.$store.commit('user/SET_TOKEN',res.data.token)
 					this.$store.dispatch('user/UpdateUserInfo') // 更新用户信息
-					setTimeout( () => {
-						uni.navigateBack()
-					},500)
+					setTimeout( () => {uni.navigateBack()},500)
+				}catch(e){
+					this.$u.toast(e.msg)
+					this.updateCaptch()
 				}
+				
 			},
 			chooseLoginType(type) {
 				this.loginDto.loginType = type

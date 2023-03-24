@@ -26,7 +26,7 @@
 
 			};
 		},
-		created() {
+		onShow() {
 			this.getCircleList();
 		},
 		methods: {

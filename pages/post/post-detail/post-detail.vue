@@ -330,12 +330,11 @@
 			share() {
 				let pages = getCurrentPages()
 				let curPage = pages[pages.length-1]
-				let path = curPage.__page__.fullPath.slice(1)
-				let url = `${this.$config.h5Url}${path}`
+				let url = `${this.$config.h5Url}${curPage.route}?postId=${this.postDetail.id}`
 				
 				// #ifdef APP-PLUS
 				uni.shareWithSystem({
-				  summary: '快看这个',
+				  summary: '',
 				  href: url
 				})
 				// #endif
